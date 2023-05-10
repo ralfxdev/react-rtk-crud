@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux"
 import { deleteTask } from "../features/tasks/taskSlice"
+import Navbar from "./Navbar"
 
 export default function TaskList() {
 
@@ -12,6 +13,7 @@ export default function TaskList() {
 
   return (
     <div>
+      <Navbar tasks={tasks} />
       {tasks.map(task => (
         <div key={task.id}>
           <h3>{task.title}</h3>
