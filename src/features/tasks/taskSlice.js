@@ -21,18 +21,28 @@ export const taskSlice = createSlice({
   reducers: {
     addTask: (state, action) => {
       /* alternative => [...state, action.payload] */
-      state.push(action.payload)
+      state.push(action.payload);
     },
     deleteTask: (state, action) => {
-      const taskFound = state.find(task => task.id === action.payload)
-      if(taskFound) {
-        state.splice(state.indexOf(taskFound), 1)
+      const taskFound = state.find((task) => task.id === action.payload);
+      if (taskFound) {
+        state.splice(state.indexOf(taskFound), 1);
       } else {
-        console.log("Task Not Found")
+        console.log("Task Not Found");
       }
-    }
+    },
+    updateTask: (state, action) => {
+      const { id, title, description } = action.payload;
+      const taskFound = state.find(task => task.id === id)
+      if (taskFound) {
+        taskFound.title = title
+        taskFound.description = description
+      } else {
+        console.log("Task Not Found");
+      }
+    },
   },
 });
 
-export const { addTask, deleteTask } = taskSlice.actions;
+export const { addTask, deleteTask, updateTask } = taskSlice.actions;
 export default taskSlice.reducer;
